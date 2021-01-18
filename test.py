@@ -3,7 +3,7 @@ import torch.nn.functional as F
 from torchvision import transforms
 from emotion_cnn import CNN
 import numpy as np
-
+from torch_utils import predict
 import cv2
 
 
@@ -41,14 +41,8 @@ while True:
         
         crop_img = gray[y:y+h, x:x+w]
         #detect emotion and softmax the output
-        crop_img = transform(crop_img)
-        output = model(torch.unsqueeze(crop_img, 0))
-        output = F.softmax(output)
-        prob, pred = torch.max(output.data, dim=1)
-
-        label = labels[pred.item()]
+        label, prob = predict(crop_img)
         full_label = str(label) + str(np.around(prob.item(), 3))
-
         #label with emotion and probability
         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
         cv2.putText(img, full_label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
