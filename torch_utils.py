@@ -11,14 +11,14 @@ labels = {0:'Angry', 1:'Disgust', 2:'Fear', 3:'Happy', 4:'Sad', 5:'Surprise', 6:
 
 #create input image transforms
 
-transform = transforms.Compose([transforms.ToPILImage(),
+transform = transforms.Compose([    transforms.ToPILImage(),
                                     transforms.Grayscale(num_output_channels=1),
                                     transforms.Resize((48, 48)),
                                     transforms.ToTensor(),
                                     transforms.Normalize(mean=[0.485], std=[0.229])])
 
 
-def predict(crop_img):
+def predict_emotion(crop_img):
     #prediction function for precropped face image
     #outputs label as a string and probability of given label
     

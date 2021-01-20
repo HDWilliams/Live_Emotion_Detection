@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <form action='/test' method="post">
+    <form action='/predict' method="post" enctype="multipart/form-data">
         <label for="img">Select image:</label>
-        <input type="file" id="img"/>
+        <input type="file" id="img" name="img"/>
         <input type="submit"/>
     </form>
 </html>
