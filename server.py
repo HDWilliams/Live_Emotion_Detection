@@ -9,7 +9,8 @@ def index():
 @app.route('/predict', methods=['POST'])
 def test():
     if request.method == 'POST':
-        print(request.files['img'])
-        label = get_full_prediction(request.files['img'])
-        return label
+        img, label = get_full_prediction(request.files['img'])
+        data = {'img': img, 'label': label}
+        print(type(img))
+        return render_template('results.html')
 
