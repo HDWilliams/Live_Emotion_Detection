@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, url_for, send_file
-#from full_prediction import get_full_prediction
+from full_prediction import get_full_prediction
 
 import io
 
