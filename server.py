@@ -18,7 +18,3 @@ def test_predict():
         output.seek(0, 0)
         return send_file(output, mimetype='image/png', as_attachment=False)
         #return render_template('results.html', data=data)
-
-
-if __name__ == "__main__":
-  app.run()
