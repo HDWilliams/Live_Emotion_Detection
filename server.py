@@ -10,7 +10,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
-def test():
+def basic_predict():
     if request.method == 'POST':
         img, label = get_full_prediction(request.files['img'])
         output = io.BytesIO()
@@ -21,3 +21,6 @@ def test():
         #return render_template('results.html', data=data)
 
 
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
