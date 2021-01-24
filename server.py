@@ -10,14 +10,13 @@ def index():
     return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
-def basic_predict():
+def test_predict():
     if request.method == 'POST':
         img, label = get_full_prediction(request.files['img'])
         output = io.BytesIO()
         img.convert('RGBA').save(output, format='PNG')
         output.seek(0, 0)
         return send_file(output, mimetype='image/png', as_attachment=False)
-
         #return render_template('results.html', data=data)
 
 
