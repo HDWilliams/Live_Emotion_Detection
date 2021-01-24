@@ -1,5 +1,8 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, url_for, send_file
 from full_prediction import get_full_prediction
+
+import io
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,7 +13,11 @@ def index():
 def test():
     if request.method == 'POST':
         img, label = get_full_prediction(request.files['img'])
-        data = {'img': img, 'label': label}
-        print(type(img))
-        return render_template('results.html')
+        output = io.BytesIO()
+        img.convert('RGBA').save(output, format='PNG')
+        output.seek(0, 0)
+        return send_file(output, mimetype='image/png', as_attachment=False)
+
+        #return render_template('results.html', data=data)
+
 
