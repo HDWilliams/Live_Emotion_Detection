@@ -20,3 +20,5 @@ def test_predict():
         #return render_template('results.html', data=data)
 
 
+if __name__ == "__main__":
+  app.run()
